@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <script type="text/javascript">
+    /* Title: Builder
+     Description: constructs complex objects by separating construction and representation
+    */
+
+    function getBeerById(id, callback) {
+
+      // Make request for beer by ID, then return the beer data.
+      asyncRequest('GET', 'beer.uri?id=' + id, function(resp) {
+        // callback response
+        callback(resp.responseText);
+      });
+    }
+
+    var el = document.querySeletor('#test');
+    el.addEventListener('click', getBeerIdBridge, false);
+
+    function getBeerIdBridge(e) {
+      getBeerById(this.id, function(beer) {
+        console.log('Request Beer:' + beer);
+      });
+    }
+
+  </script>
+</body>
+</html>
