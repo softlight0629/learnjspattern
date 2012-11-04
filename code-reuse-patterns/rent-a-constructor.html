@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <script type="text/javascript">
+    /* Title: Classocal Pattern #2 - Rent a Constructor (a pattern that should be generally avoided)
+     Description: it borrows the parent constructor, passing the child object to be bound to this and also forwarding any arguments
+     */
+
+    // the parent constructor
+    function Parent(name) {
+      this.name = name || 'Admin';
+    }
+
+    // adding functionality to the prototype
+    Parent.prototype.say = function() {
+      return this.name;
+    }
+
+    // child constructor
+    function Child(name) {
+      Parent.apply(this, arguments);
+    }
+
+    var kid = new Child("Patrick");
+    console.log(kid.name); // "Patrick"
+
+    // Drawback 1: nothing from the prototype gets inherited
+    console.log(typeof kid.say); // "undefined"
+
+    // Mutiple Inheritance by Borrowing Constructors
+    function Cat() {
+      this.legs = 4;
+      this.say = function() {
+        return "2222";
+      }
+    }
+
+    function Bird() {
+      this.wings = 2;
+      this.fly = true;
+    }
+
+    function CatWings() {
+      Cat.apply(this);
+      Bird.apply(this);
+    }
+
+    var jane = new CatWings();
+    console.dir(jane);
+  </script>
+</body>
+</html>

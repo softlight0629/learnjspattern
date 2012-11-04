@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <script type="text/javascript">
+    /* Title: Classical Pattern #3 - Rent and Set Prototype (a pattern that should be generally avoided)
+     Description: first borow the constructor and then also set the child's prototype to point a new instance of the constructor
+     */
+
+    // the parent constructor
+    function Parent(name) {
+      this.name = name || 'Admin';
+    }
+
+    // adding functionality to the prototype
+    Parent.prototype.say = function() {
+      return this.name;
+    }
+
+    // child constructor
+    function Child(name) {
+      Parent.apply(this, arguments);
+    }
+
+    Child.prototype = new Parent();
+
+    var kid = new Child("Patrick");
+    console.log(kid.name); // "Patrick"
+    console.dir(kid);
+    console.log(kid.say());
+
+    // Drawback - the parent constructor is called twice, so it could be inefficient
+  </script>
+</body>
+</html>
