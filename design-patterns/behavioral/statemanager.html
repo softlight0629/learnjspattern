@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <script type="text/javascript">
+    /* Title: StateManager */
+    var StateManager = function() {
+      var currState = 'wait';
+      var states = {
+        jump: function(state) {
+          console.log("I'm jumping");
+          currState = 'jump';
+        },
+        wait: function(state) {
+          console.log("I'm waiting");
+          currState = 'wait';
+        },
+        attack: function(state) {
+          console.log("I'm attacking");
+          currState = 'attack';
+        },
+        defense: function(state) {
+          if (currState == 'jump') {
+            console.log('defense can not be executed when current state is jummp!');
+            return false;
+          }
+          console.log("I'm defensing");
+          currState = 'defense';
+        }
+      };
+      var changeState = function(state) {
+        states[state] && states[state]();
+      }
+
+      var getCurrentState = function() {
+        return currState;
+      }
+
+      return {
+        changeState: changeState,
+        getCurrentState: getCurrentState
+      }
+    }
+
+    var stateManger = StateManager();
+    stateManger.changeState('defense');
+    stateManger.changeState('jump');
+    stateManger.changeState('defense');
+
+  </script>
+</body>
+</html>

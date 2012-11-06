@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <script type="text/javascript">
+   /* Title: Test the mmechanism of instanceof method */
+
+   var Man = function() {}
+
+   Man.prototype.sex = function() {
+    return "I'm a man";
+   }
+
+   var Woman = function() {}
+
+   Woman.prototype =  Man.prototype;
+
+   var Child = function() {
+     Child.prototype = {
+       change:function(){}
+     }
+   }
+
+   Child.prototype = new Man();
+
+   var kid = new Child();
+   console.log(kid instanceof Child); // false
+   console.log(kid instanceof Man); // true
+   console.log(kid instanceof Woman); // true
+   console.dir(kid);
+
+   // object has a _proto_ property which can not be seen by developer. Judging an object whether instanceof one class is to find the _proto_ property point to the same object that pointed by the property of prototype of that class.
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <script type="text/javascript">
+  /* Title: Test hasOwnProperty method */
+
+  function Parent() {
+    this.p = "I'm p";
+  }
+
+  Parent.prototype.pp = "I'm pp";
+
+  function Child() {
+    this.c = "I'm c";
+    this.anotherc = "I'm anotherc";
+  }
+
+  Child.prototype = new Parent();
+  Child.prototype.cc = "I'm cc";
+
+  var kid = new Child();
+  for (var i in kid) {
+   if (kid.hasOwnProperty(i)) {
+      console.log(i); // print "c" "anotherc"
+   }
+    
+  }
+
+  </script>
+</body>
+</html>
